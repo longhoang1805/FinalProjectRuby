@@ -1,0 +1,106 @@
+.khoi-slide1 {
+   width: 100%;
+   height: 700px;
+   position: relative;
+}
+img {
+   width: 100%;
+}
+.cac-slide1 {
+   width: 100%;
+   height: 700px;
+   overflow: hidden;
+}
+.slide1 {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   opacity: 0;
+   visibility: hidden;
+}
+.slide1.active1{
+   opacity: 1;
+   visibility: visible;
+}
+.nut-slide1 span{
+   color: white;
+   font-size: 60px;
+   opacity: 0.6;
+}
+span#btn-prev1{
+   position: absolute;
+   top: 30%;
+   left: 0%;
+   z-index: 10;
+   cursor: pointer;
+}
+span#btn-next1{
+   position: absolute;
+   top: 30%;
+   right: 0%;
+   z-index: 10;
+   cursor: pointer;
+}
+.nut-slide1 ul {
+   position: absolute;
+   z-index: 10;
+   width: 100px;
+   bottom: 25%;
+   left: 50%;
+   margin-left: -50px;
+   display: flex;
+   justify-content: space-between;
+}
+.nut-slide1 ul li {
+   width: 20px;
+   height: 20px;
+   background: white;
+   opacity: 0.6;
+   list-style: none;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: 0.6s;
+}
+.select-dangbai{
+    border-radius: 10px;
+    height: 30px;
+    max-width: 200px;
+   margin-bottom: 20px;
+   border-width: 2px;
+
+}
+.dangbai{
+   line-height: 30px;
+   padding-top: 20px;
+}
+.chitiet{
+   border-radius: 15px;
+   border-width: 2px;
+}
+.button-dangbai{
+   background-color: #D10024;
+   color: white;
+   height: 40px;
+   width: 120px;
+
+   border-width: 0;
+   border-radius: 30px;
+}
+.taikhoan{
+
+}
+.taikhoan h3{
+   color: #D10024;
+}
+.taikhoan h5:hover{
+   color: #D10024;
+  
+   transition-duration: 0.2s;
+}
+.taikhoan .sp{
+   margin-top: 30px;
+}
+.taikhoan .trangthai{
+   font-size: 16px;
+   font-weight: bold;
+}

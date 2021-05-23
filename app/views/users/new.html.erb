@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tạo đội, tìm đối hay cáp kèo | Nhận xét đánh giá đối thủ sau khi chơi</title>
+	<meta charset="utf-8">
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/dangnhap.css">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link href="http://soccerclub.axiomthemes.com/wp-content/uploads/2016/04/logo.png" rel="shortcut icon" type="image/png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+<body class="d-flex flex-column h-100">
+	<div class="sporta-nav navbar-fixed">
+	  <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+	    <div class="container-fluid">
+	      <div class="d-flex align-items-center">
+	        <a href="" class="navbar-brand py-1 ml-2">
+	          <img src="http://soccerclub.axiomthemes.com/wp-content/uploads/2016/04/logo.png" style="width: 50px; height: 35px;">
+	        </a>
+	      </div>
+	      <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+	      <!-- Navbar Collapse -->
+	      <div id="navbarCollapse" class="collapse navbar-collapse mr-3">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:3000/trangchu">Trang chủ</a></li>
+	          <li class="nav-item"><a class="nav-link" href="login-owner">Dành cho chủ sân</a></li>
+	          <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:3000/dangnhap">Đăng nhập</a></li>
+	          
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	</div>
+	<main style="padding-top: 63px;">
+		<div class="container">
+			  <div class="row justify-content-center mt-3">
+			    <h4 class="text-center orange-text">Đăng ký tài khoản</h4>
+			  </div>
+			      <%= form_for @user, html: {class: "form-horizontal"} do |f| %>
+			    <div class="row justify-content-center">
+			      <div class="col-md-6 col-sm-12">
+			      	<div class="form-group">
+			          <label for="user_name">Họ tên</label>
+                      <%= f.text_field :name, class: "form-control", placeholder: "Enter user name" %>
+			        </div>
+			        <div class="form-group">
+			          <label for="user_email">Email</label>
+			          <input class="form-control" type="email" value="" name="email" id="email" required autocomplete="email">
+			        </div>
+			        <div class="form-group">
+			          <label for="user_password">Mật khẩu</label>
+                        <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+			        </div>
+			        <div class="form-group">
+			          <label for="user_password_confirmation">Xác nhận mật khẩu</label>
+			          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Enter password confirmation" %>
+			        </div>
+			      </div>
+			      <div class="col-md-8 text-center">
+                         <%= f.submit "Đăng ký", class: "btn btn-outline-orange" %>
+			      </div>
+			    </div>
+			<% end %>
+			    <div class="col-md-6">
+			      <hr data-content="hoặc" class="my-3 hr-text letter-spacing-2">
+
+			<a class="btn btn btn-outline-primary btn-block btn-social mb-3 bt-fb" href="">
+			  <i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Đăng nhập với Facebook
+			</a><a class="btn btn btn-outline-red btn-block btn-social mb-3 bt-gg" href="">
+			  <i class="fa-2x fa-google fab btn-social-icon"></i>Đăng nhập với Google
+			</a>
+			    </div>
+			  </div>
+		</div>
+	</main>
+</body>
+</html>

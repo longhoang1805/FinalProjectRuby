@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tạo đội, tìm đối hay cáp kèo | Nhận xét đánh giá đối thủ sau khi chơi</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/dangnhap.css">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link href="http://soccerclub.axiomthemes.com/wp-content/uploads/2016/04/logo.png" rel="shortcut icon" type="image/png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+<body class="d-flex flex-column h-100">
+	<div class="sporta-nav navbar-fixed">
+	  <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+	    <div class="container-fluid">
+	      <div class="d-flex align-items-center">
+	        <a href="" class="navbar-brand py-1 ml-2">
+	          <img src="http://soccerclub.axiomthemes.com/wp-content/uploads/2016/04/logo.png" style="width: 50px; height: 35px;">
+	        </a>
+	      </div>
+	      <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+	      <!-- Navbar Collapse -->
+	      <div id="navbarCollapse" class="collapse navbar-collapse mr-3">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/home1">Trang chủ</a></li>
+	          <li class="nav-item"><a class="nav-link" href="login-owner">Dành cho chủ sân</a></li>
+	          <li class="nav-item"><a class="nav-link" href="dang-nhap">Đăng nhập</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	</div>
+	<main style="padding-top: 63px;">
+		<div class="container-fluid px-3 login">
+        
+			<div class="row min-vh-100">
+				<div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+					<div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+						<div class="mb-4">
+					        <h3 class="orange-text">SPORTSC</h3>
+					        <h4 class="d-none d-md-block">Chào mừng bạn quay lại</h4>
+					        <div class="d-md-none">
+					            <h4>Chào mừng bạn quay lại</h4>
+					          </div>
+					    </div>
+					    <a class="btn btn btn-outline-primary btn-block btn-social mb-3 bt-fb" href="">
+						    <i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Đăng nhập với Facebook
+						</a>
+						<a class="btn btn btn-outline-red btn-block btn-social mb-3 bt-gg" href="{{ url('admin/redirect') }}">
+						    <i class="fa-2x fa-google fab btn-social-icon"></i>Đăng nhập với Google
+						</a>
+						<hr data-content="hoặc" class="my-3 hr-text letter-spacing-2">
+						<%= form_with  html: {class: "form-horizontal"} do |f| %>
+						          <div class="form-group">
+						            <label for="loginUsername" class="form-label">Địa chỉ Email</label>
+						           <%= f.text_field :name, class: "form-control", placeholder: "Enter user name" %>
+						          </div>
+						          <div class="form-group mb-2">
+						            <div class="row">
+						              <div class="col">
+						                <label for="loginPassword" class="form-label">Mật Khẩu</label>
+						              </div>
+						            </div>
+                                    <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+						          </div>
+						          <div class="form-group mb-4">
+						            <div class="custom-control custom-checkbox">
+						              <input class="custom-control-input" type="checkbox" value="1" name="remember" id="remember">
+						              <label for="remember" class="custom-control-label text-muted"> <span class="text-sm">Ghi nhớ mật khẩu</span></label>
+						            </div>
+						          </div>
+						          <!-- Submit-->
+                                  <%= f.submit "Đăng nhập", class: "btn btn-block btn-secondary bt-login" %>
+						          <div class="mt-1 row">
+						            <div class="col-6"><a href="reset-password" class="form-text small">Quên mật khẩu?</a></div>
+						            <div class="col-6">
+						              <a href="http://127.0.0.1:3000/dangky" class="float-right form-text small">Đăng ký</a>
+						            </div>
+						          </div>
+						 <% end%>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+					<div class="overlay pt-5 mt-5 pb-5">
+                          
+						<div class="overlay-content">
+					          <div class="row justify-content-center">
+					            <div class="col-md-8 new-business-info text-center mt-7">
+					              <h1 class="center orange-text">SPORTSC</h1>						      
+					              <p class="center text-white mt-2">
+					                Kết nối với đồng đội và cộng đồng những người chơi bóng đá khắp thế giới. Đăng thông tin trận đấu và bắt cặp/tìm đối dễ dàng. Nhận xét đối thủ sau mỗi trận. Với Sporta, không còn tình trạng chênh lệch trình độ hay chơi xấu.
+					              </p>
+					            </div>
+					          </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

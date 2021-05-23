@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Tech - Connection-Trang chủ</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <%= stylesheet_link_tag "bootstrap.min.css" %>
+
+    <!-- Slick -->
+    <%= stylesheet_link_tag "slick.css" %>
+    <%= stylesheet_link_tag "slick-theme.css" %>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+     <%= stylesheet_link_tag "slick.css" %>
+
+    <!-- Font Awesome Icon -->
+     <%= stylesheet_link_tag "font-awesome.min.css" %>
+
+    <!-- Custom stlylesheet -->
+     <%= stylesheet_link_tag "style.css" %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+        <style>
+        .style_image
+        {
+            width: 100px;
+        }
+        .table
+        {
+            width: 1000px;
+            padding-top: 100px;
+            padding-left: 200px;
+            margin-top:100px;
+            margin-left:100px;
+            margin-bottom:100px;
+        }
+        </style>
+
+</head>
+
+<body  onload="demnguoc()">
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+
+                </ul>
+                <div class="header-links pull-right">
+                    <% if @user%>
+                    <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                   <li> <i class="fa fa-user"></i>
+                                    <span style="color: white"><%= @user.name%></span></li>
+                                </a>
+                                </div>
+                            </div>
+                    <% else %>
+                      <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                   <li> <i class="fa fa-user"></i>
+                                    <span style="color: white">Đăng nhập</span></li>
+                                </a>
+                                </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="index.html" class="logo">
+                                 <%= image_tag 'logo.png' %>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-5">
+                        <div class="header-search">
+                            <form>
+                                <select class="input-select">
+										<option value="0">Tất cả</option>
+										<option value="1">Điện thoại</option>
+										<option value="1">Máy tính</option>
+										<option value="1">Máy ảnh</option>
+										<option value="1">Tivi</option>
+										<option value="1">Phụ kiện</option>
+									</select>
+                                <input class="input" placeholder="Từ khóa">
+                                <button class="search-btn">Tìm kiếm</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-4 clearfix">
+                        <div class="header-ctn">
+                            <div>
+                                <a href="dangbai.html">
+                                    <i class="fa fa-edit"></i>
+                                    <span>Giỏ Hàng</span>
+
+                                </a>
+                            </div>
+
+                            
+                            <!-- /Wishlist -->
+
+                            <!-- Cart -->
+                            
+                            <!-- /Cart -->
+
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+    <h1 style= "padding-left:550px;padding-top:50px;">Giỏ Hàng</h1>
+    <!-- NAVIGATION -->
+    <% @cart.each do |cd|%>
+    <%if cd.id_user = @user.id%>
+    <% @product.each do |pr|%>   
+    <% if cd.products_id == pr.id%>
+    <table class="table">
+       <thead>
+          <th>Image</th>
+          <th>Tên</th>
+          <th>Giá Tiền</th>
+          <th> Số lượng</th>
+          <th>Tổng Tiền</th>
+          <th>Xóa</th>
+       </thead>
+       <tbody>
+       <form action="http://127.0.0.1:3000/sanpham/cart/soluong/<%= pr.id %>" method="get">
+       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+          <td> <%= image_tag pr.avatar.to_s ,:class => "style_image" %></td>
+          <td> <%= pr.tensp%><input type="text" name="idss" class="soluong1" value="<%= pr.id%>" style="text-align:center;display:none;"></td>
+          <td> <input type="text" name="price" class="soluong1" value="<%= pr.price%>" style="border: none;padding-top:20px;"></td>
+          <td> <input type="number" name="sl" class="soluong" value="<%= pr.soluong %>" style="border: none;padding-top:20px;"></td>
+          <td>  <input type="text" name="total"  value="<%= pr.soluong*pr.price %>" style="border: none;padding-top:20px;"></td>
+           <td>
+           <button type="submit" class="btn btn-primary pull-right">Sửa</button>
+           <form action="http://127.0.0.1:3000/cart/xoa/<%= pr.id %>" method="delete">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <a href="http://127.0.0.1:3000/cart/xoa/<%= cd.id %>" data-method="delete" rel="nofollow" class="btn btn-danger pull-right">delete</a>
+            </form>
+           </td>
+           </form>
+       </tbody>
+    </table>
+    <% end %>
+   <% end %>
+   <% end %>
+   <% end %>
+    <% @sum.each do |dt| %>
+    <h5 style="padding-left:1000px;">Tổng: <%= dt['sum']%></h5>
+   <%end%>
+    <!-- /NAVIGATION -->
+
+    <!-- <div style="text-align: center;">
+			<img src="img/pt1.jpg" alt="">
+		</div> -->
+  
+           
+    <!-- /SECTION -->
+
+    <!-- HOT DEAL SECTION -->
+
+    <!-- /HOT DEAL SECTION -->
+
+    <!-- SECTION -->
+  
+    <!-- /SECTION -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Sản phẩm mới đăng</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-3" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+
+                    <div class="products-widget-slick" data-nav="#slick-nav-3">
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product07.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Điện thoại Samsung cũ </a></h3>
+                                    <p class="product-category">
+                                        <h5>Đà Nẵng Mobile</h5>
+                                    </p>
+                                    <h4 class="product-price">2.600.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    <%= image_tag 'product08.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop Asus 99% new</a></h3>
+                                    <p class="product-category">
+                                        <h5>Huy Hoàng Laptop</h5>
+                                        <h4 class="product-price">7.300.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    <%= image_tag 'product09.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Máy ảnh giá rẻ</a></h3>
+                                    <p class="product-category">
+                                        <h5>Hồng Hà</h5>
+                                        <h4 class="product-price">2.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product01.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop Acer</a></h3>
+                                    <p class="product-category">
+                                        <h5>Laptop Kiên</h5>
+                                        <h4 class="product-price">7.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                  
+                                    <%= image_tag 'product02.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop cũ giá rẻ</a></h3>
+                                    <p class="product-category">
+                                        <h5>Laptop Đà Nẵng</h5>
+                                        <h4 class="product-price">6.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product03.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Tai nghe còn mới 99%</a></h3>
+                                    <p class="product-category">
+                                        <h5>H2T</h5>
+                                        <h4 class="product-price">650.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Sản phẩm được đánh giá cao</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-4" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+
+                    <div class="products-widget-slick" data-nav="#slick-nav-4">
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product04.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Ipad 2019</a></h3>
+                                    <p class="product-category">
+                                        <h5>Đà Nẵng Mobile</h5>
+                                        <h4 class="product-price">2.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product05.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Tai nghe Sony mới</a></h3>
+                                    <p class="product-category">
+                                        <h5>Zeros</h5>
+                                        <h4 class="product-price">1.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product06.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop MSI</a></h3>
+                                    <p class="product-category">
+                                        <h5>Phong Vũ</h5>
+                                        <h4 class="product-price">4.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product07.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Vsmart Joy 3 mới</a></h3>
+                                    <p class="product-category">
+                                        <h5>Cửa hàng Athena</h5>
+                                        <h4 class="product-price">1.800.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product08.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop Asus cũ giá rẻ</a></h3>
+                                    <p class="product-category">
+                                        <h5>Đà Nẵng Laptop</h5>
+                                        <h4 class="product-price">3.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product09.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Máy ảnh Rekam</a></h3>
+                                    <p class="product-category">
+                                        <h5>Ánh Chee</h5>
+                                        <h4 class="product-price">1.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-sm visible-xs"></div>
+
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Sản phẩm được xem nhiều</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-5" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+
+                    <div class="products-widget-slick" data-nav="#slick-nav-5">
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product01.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop HP Pavillon</a></h3>
+                                    <p class="product-category">
+                                        <h5>SGD</h5>
+                                        <h4 class="product-price">4.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product02.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Tai nghe JBL giá tốt</a></h3>
+                                    <p class="product-category">
+                                        <h5>GAM</h5>
+                                        <h4 class="product-price">800.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    
+                                    <%= image_tag 'product03.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop Dell cũ</a></h3>
+                                    <p class="product-category">
+                                        <h5>Optimus</h5>
+                                        <h4 class="product-price">5.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+
+                        <div>
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    <%= image_tag 'product04.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Ipad cũ giá rẻ</a></h3>
+                                    <p class="product-category">
+                                        <h5>Uzi</h5>
+                                        <h4 class="product-price">5.500.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                    <%= image_tag 'product05.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Tai nghe Sony</a></h3>
+                                    <p class="product-category">
+                                        <h5>Levi</h5>
+                                        <h4 class="product-price">700.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- /product widget -->
+
+                            <!-- product widget -->
+                            <div class="product-widget">
+                                <div class="product-img">
+                                   
+                                    <%= image_tag 'product06.png' %>
+                                </div>
+                                <div class="product-body">
+
+                                    <h3 class="product-name"><a href="#">Laptop MSI</a></h3>
+                                    <p class="product-category">
+                                        <h5>Baroibeo</h5>
+                                        <h4 class="product-price">6.800.000 VND</h4>
+                                </div>
+                            </div>
+                            <!-- product widget -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- NEWSLETTER -->
+
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Tech - connection</h3>
+                            <p>Winner of Best Web Design SICT 2020</p>
+                            <ul class="footer-links">
+                                <li><a href="http://vku.udn.vn"><i class="fa fa-map-marker"></i>Khoa công nghệ thông tin<br>Đại học công nghệ thông tin<br>và truyền thông Việt - Hàn</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i>(028)38664041</a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>tech_connection@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Danh mục</h3>
+                            <ul class="footer-links">
+                                <li><a href="tv1.html">Tivi, âm thanh</a></li>
+                                <li><a href="laptop1.html">Máy tính</a></li>
+                                <li><a href="dienthoai.html">Điện thoại</a></li>
+                                <li><a href="mayanh.html">Máy ảnh, máy quay</a></li>
+                                <li><a href="#">Mục khác</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Thông tin</h3>
+                            <ul class="footer-links">
+                                <li><a href="gioithieu.html">Giới thiệu</a></li>
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Truyền thông</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Trợ giúp</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Liên kết</h3>
+
+                            <img src="./img/fb.png" alt="">
+                            <img src="./img/gg.png" alt="">
+                            <br>
+                            <br>
+                            <h3 class="footer-title">Chứng nhận</h3>
+                            <ul class="footer-links">
+                                <li><img src="./img/bocongthuong.png" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+
+        <!-- bottom footer -->
+
+        <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+
+    <%= javascript_pack_tag 'main.js' %>
+    <%= javascript_pack_tag 'diadiem.js' %>			
+</body>
+
+</html>

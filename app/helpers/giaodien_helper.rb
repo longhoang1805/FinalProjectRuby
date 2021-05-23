@@ -1,0 +1,2 @@
+module GiaodienHelper
+end

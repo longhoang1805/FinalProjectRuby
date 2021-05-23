@@ -1,0 +1,32 @@
+<h1 style="margin-left: 80px;padding-top:50px;">Danh sách Sản Phẩm</h1>
+<a href="http://127.0.0.1:3000/sanpham/new"><button class="btn2" style="width: 110px;">NEW</button></a>
+<table class="table" style="width: 800px;margin-left:200px;margin-top: 100px;">
+  <thead class="thead-dark">
+    <tr style="color: white;background: black;">
+      <th scope="col">#</th>
+      <th scope="col">Tên Sản Phẩm</th>
+      <th scope="col">Giá</th>
+      <th scope="col">Số Lượng</th>
+      <th scope="col">Ghi Chú</th>
+      <th scope="col">Ảnh</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @sp.each do |tl| %>
+    <tr>
+      <th scope="row"><%= tl.id %></th>
+      <th scope="row"><%= tl.tensp %></th>
+      <th scope="row"><%= tl.price %></th>
+      <th scope="row"><%= tl.soluong %></th>
+      <th scope="row"><%= tl.ghichu %></th>
+      <th scope="row"><%= image_tag tl.avatar.to_s , class: "recipe-show" %></th>
+      <td style="width: 100px;"><a href="http://127.0.0.1:3000/sanpham/edit/<%= tl.id %>"><button class="btn2" style="width: 110px;">Edit</button></a></td>
+      <form action="http://127.0.0.1:3000/sanpham/delete/<%= tl.id %>" method="delete">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <td style="width: 100px;"><button type="submit" class="btn btn-primary pull-right">Xóa</button></td>
+      </form>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
