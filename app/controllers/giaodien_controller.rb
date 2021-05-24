@@ -13,7 +13,7 @@ class GiaodienController < ApplicationController
              products_id: params[:id]
          )
          @abc1.save
-         redirect_to "/trangchu"
+         redirect_to "/sanpham/cart"
     end 
     def giohang
         if session[:user_id]

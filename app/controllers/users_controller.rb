@@ -9,14 +9,20 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "Register success"
-      redirect_to users_path
+      redirect_to trangchu_path
     else
       flash[:success] = "Register failed"
       render :new
     end
   end
+
   def login
   end
+
+  def logout
+    redirect_to "/dangnhap"
+  end
+  
   def login_user
     user = User.find_by(name: params[:name])
     

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Tech - Connection-Trang chủ</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <%= stylesheet_link_tag "bootstrap.min.css" %>
+
+    <!-- Slick -->
+    <%= stylesheet_link_tag "slick.css" %>
+    <%= stylesheet_link_tag "slick-theme.css" %>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+     <%= stylesheet_link_tag "slick.css" %>
+
+    <!-- Font Awesome Icon -->
+     <%= stylesheet_link_tag "font-awesome.min.css" %>
+
+    <!-- Custom stlylesheet -->
+     <%= stylesheet_link_tag "style.css" %>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<style type="text/css" media="screen">
+			.sp-hover :hover{
+				border-color: blue;
+
+			}
+			
+		</style>
+
+</head>
+
+<body  onload="demnguoc()">
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+
+                </ul>
+                <div class="header-links pull-right">
+                    <% if @user%>
+                    <div class="dropdown">
+                  
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-user"></i>
+                                    <span style="color: white"><%= @user.name%></span>
+                                  </a>
+                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" style="color: black" href="http://127.0.0.1:3000/dangxuat">Đăng xuất</a></li>
+                              </ul>
+                              
+                                </div>
+                            </div>
+                    <% else %>
+                      <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                   <li> <i class="fa fa-user"></i>
+                                    <span style="color: white">Đăng nhập</span></li>
+                                </a>
+                                </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="index.html" class="logo">
+                                 <%= image_tag 'logo.png' %>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-5">
+                        <div class="header-search">
+                            <form>
+                               <%= form_tag(results_search_index_path, method:"get",  style:'padding:22px;', class:'form-inline my-2 my-lg-0') do%>
+  
+  <%=text_field_tag(:q, "", placeholder:'Tìm trong trang', style:'border-radius: 15px', class:'form-control mr-sm-2')  %>
+  <%= submit_tag("Tìm kiếm", class:'btn btn-outline-success my-2 my-sm-0' )  %>
+<% end %>
+                                <!-- <button class="search-btn">Tìm kiếm</button> -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-4 clearfix">
+                        <div class="header-ctn">
+                            <div>
+                                <a href="http://127.0.0.1:3000/sanpham/cart">
+                                    <i class="fa fa-edit"></i>
+                                    <span>Giỏ Hàng</span>
+
+                                </a>
+                            </div>
+
+                            
+                            <!-- /Wishlist -->
+
+                            <!-- Cart -->
+                            
+                            <!-- /Cart -->
+
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+
+    <!-- NAVIGATION -->
+    <nav id="navigation">
+        <!-- container -->
+        <div class="container">
+            <!-- responsive-nav -->
+            <div id="responsive-nav">
+                <!-- NAV -->
+                <ul class="main-nav nav navbar-nav">
+                    
+            </div>
+            <!-- /responsive-nav -->
+        </div>
+        <!-- /container -->
+    </nav>
+<h2 align="center">Kết quả tìm kiếm: <%= @product.size %></h2>
+<% if @product.empty? %>
+<p>Không tìm thấy kết quả</p>
+<% else %>
+<div class="container" style="margin: 20px">
+	<div class="row">
+		
+
+	<% @product.each do |sp| %>
+	<div class="col-md-4 sp-hover" style="margin-bottom: 10px; ">
+<div class="card" style="width: 300px;">
+  <img src="<%= sp.avatar %>" width="300px" height="300px" class="card-img-top" alt="...">
+  <hr>
+  <div class="card-body">
+
+    <p>Tên sản phảm: <span style="font-weight: bold; font-size: 18px;" class="card-title"><%= sp.tensp %></span></p>
+     <p>Giá: <span style="font-weight: bold; font-size: 14px;" class="card-title"><%= sp.price %></span></p>
+      <p>Số lượng: <span style="font-weight: bold; font-size: 14px;" class="card-title"><%= sp.soluong %></span></p>
+    <p>Ghi chú: <span style="font-weight: bold; font-size: 14px;" class="card-title"><%= sp.ghichu %></span></p>
+    </div>
+    <div class="row" style="text-align: center; padding: 10px;">
+    	<div class="col-md-6">
+    		<div>
+    			
+    		<a href="" class="btn btn-primary">ADD</a>
+    		</div>
+
+    	</div>
+
+    	<div class="col-md-6">
+    		<div>
+    		<a href="" class="btn btn-success">MORE</a>
+    		</div>
+
+    	</div>
+    </div>
+  </div>
+</div>
+
+	
+	<% end %>
+
+	</div>
+</div>
+<% end %>
+<footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Tech - connection</h3>
+                            <p>Winner of Best Web Design SICT 2020</p>
+                            <ul class="footer-links">
+                                <li><a href="http://vku.udn.vn"><i class="fa fa-map-marker"></i>Khoa công nghệ thông tin<br>Đại học công nghệ thông tin<br>và truyền thông Việt - Hàn</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i>(028)38664041</a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>tech_connection@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Danh mục</h3>
+                            <ul class="footer-links">
+                                <li><a href="tv1.html">Tivi, âm thanh</a></li>
+                                <li><a href="laptop1.html">Máy tính</a></li>
+                                <li><a href="dienthoai.html">Điện thoại</a></li>
+                                <li><a href="mayanh.html">Máy ảnh, máy quay</a></li>
+                                <li><a href="#">Mục khác</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Thông tin</h3>
+                            <ul class="footer-links">
+                                <li><a href="gioithieu.html">Giới thiệu</a></li>
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Truyền thông</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Trợ giúp</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Liên kết</h3>
+
+                            <img src="./img/fb.png" alt="">
+                            <img src="./img/gg.png" alt="">
+                            <br>
+                            <br>
+                            <h3 class="footer-title">Chứng nhận</h3>
+                            <ul class="footer-links">
+                                <li><img src="./img/bocongthuong.png" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+
+        <!-- bottom footer -->
+
+        <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+
+    <%= javascript_pack_tag 'main.js' %>
+    <%= javascript_pack_tag 'diadiem.js' %>			
+</body>
+
+</html>

@@ -24,7 +24,9 @@
       <td style="width: 100px;"><a href="http://127.0.0.1:3000/sanpham/edit/<%= tl.id %>"><button class="btn2" style="width: 110px;">Edit</button></a></td>
       <form action="http://127.0.0.1:3000/sanpham/delete/<%= tl.id %>" method="delete">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <td style="width: 100px;"><button type="submit" class="btn btn-primary pull-right">Xóa</button></td>
+      <td style="width: 100px;">
+        <a href="http://127.0.0.1:3000/sanpham/delete/<%= tl.id %>" data-method="delete" rel="nofollow" class="btn btn-danger pull-right">delete</a>
+      </td>
       </form>
     </tr>
     <% end %>

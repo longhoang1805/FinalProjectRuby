@@ -40,7 +40,8 @@ class SanphamController < ApplicationController
      if session[:user_id]
            @user = User.find_by(id: session[:user_id])
         end
-    @abc = Product.find(params[:id]).destroy
+    @abc = Product.find(params[:id])
+    @abc.destroy
     redirect_to "/sanpham/index"
   end
 end

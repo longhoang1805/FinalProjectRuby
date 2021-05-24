@@ -1,0 +1,5 @@
+<%= form_tag(results_search_index_path, method:"get",  style:'padding:22px;', class:'form-inline my-2 my-lg-0') do%>
+  
+  <%=text_field_tag(:q, "", placeholder:'Tìm trong trang', style:'border-radius: 15px', class:'form-control mr-sm-2')  %>
+  <%= submit_tag("Tìm kiếm", class:'btn btn-outline-success my-2 my-sm-0' )  %>
+<% end %>
